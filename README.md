@@ -5,7 +5,7 @@
     - [Engine Variables](./Variables.md)
     - [Classes](./Classes.md)
       - [World](./World.md)
-    - [Netplay](Netplay.md)
+    - [Netplay](./Netplay/Netplay.md)
     - [Python API](./Python_API.md)
       - [Modules](./Python_Modules.md)
       - [Callbacks](./Callbacks.md)
