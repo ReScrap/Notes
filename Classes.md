@@ -31,21 +31,22 @@
 
 ## Class Inheritance
 
+
 ```mermaid
 graph LR
     World
     ActionClassList
     SaveVar
-    App --> Window
-    Cam --> CamPath
-    Entity --> Cam
-    Cam --> FCam
-    Entity --> Obj
-    Obj --> item
-    Obj --> WithLife
-    WithLife --> Car
-    WithLife --> WalkChar
-    WithLife --> Missile
+	Window --> App 
+	CamPath --> Cam
+	Cam --> Entity
+	FCam --> Cam
+	Obj --> Entity
+	item --> Obj
+	WithLife --> Obj
+	Car --> WithLife
+	WalkChar --> WithLife
+	Missile --> WithLife
 ```
 
 # Attributes (VMT index 16,17,18 for accessor functions)
