@@ -1,6 +1,13 @@
 They are called from python with:
 ```python
-SAct.SetAct("EventFunc","!<CallbackName>")
+# Set Callback function
+Scrap.SetCallFunc("!<Callback Name>")
+# Add parameters
+Scrap.AddParams(str)
+Scrap.AddParamf(float)
+Scrap.AddParami(int)
+# Execute
+Scrap.Execute()
 ```
 
 Note the `!` symbol in front of the callback name
