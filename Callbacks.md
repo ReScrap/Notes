@@ -1,4 +1,10 @@
-They are called from python with:
+They can be used in function parameters like so:
+```python
+SAct.SetAct("EventFunc","!<CallbackName>")
+```
+
+Or directly called from python:
+
 ```python
 # Set Callback function
 Scrap.SetCallFunc("!<Callback Name>")
