@@ -8,7 +8,7 @@
  .sm3           | 3d model file            | y       
  .dum           | Dummy (map object) file  | y       
  .pth           | AI Path                  | n       
- .emi           | Emission maps/Materials? | y       
+ .emi           | Level geometry           | y       
  .amc           | Collision Data           | y       
  .ini           | Configuration            | n       
  .txa           | Texture Animation Config | n       

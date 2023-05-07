@@ -1,13 +1,13 @@
 They can be used in function parameters like so:
 ```python
-SAct.SetAct("EventFunc","!<CallbackName>")
+SAct.SetAct("EventFunc","!<Callback_Name>")
 ```
 
 Or directly called from python:
 
 ```python
 # Set Callback function
-Scrap.SetCallFunc("!<Callback Name>")
+Scrap.SetCallFunc("!<Callback_Name>")
 # Add parameters
 Scrap.AddParams(str)
 Scrap.AddParamf(float)
@@ -17,6 +17,12 @@ Scrap.Execute()
 ```
 
 Note the `!` symbol in front of the callback name
+
+# Parameters
+
+- EditText:
+	- player_id: int
+	- scorer_item_name: str
 
 ## OG
 

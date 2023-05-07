@@ -37,10 +37,10 @@ Hexdump:
 0110  00 14 00 9E FF F6 E8 C8 9F 08 22 FC 8F F3 FF FF  ..........".....
 ```
 
-Split up into chunks:
+Split up into parts:
 
 ```
-0f 00 0002 0007 00 7544b3c5 90183747 74c6b246 0098
+0f00 0002 0007 00 7544b3c5 90183747 74c6b246 0098
 
 0500 00 09955f3c000671340281062c090900001d007f5e0e22c6ddf52247cce2b64655163b8c8e0b4a272f44e7afc745ef913546000000000000
 0000 00 08155f8300035186005100e9fb08050040007e5700ffff6301000010ff2365f96e1e000000
@@ -67,16 +67,16 @@ Size: 0285   PlyId: 002   NumVals: 007
 Structure:
 
 ```
-
-0f00 # Unk
+0f00 # Unk (TypeID?)
 0002 # PlayerID
 0007 # Num Vals
-00 # Unk
+00 # Unk (Flags?)
 7544b3c5 # Pos.X
 90183747 # Pos.Y
 74c6b246 # Pos.Z
 00 # Player Index
 98 # Rtt
+# Ent_ID, Ent_Type, Data
 0500 00 09955f3c000671340281062c090900001d007f5e0e22c6ddf52247cce2b64655163b8c8e0b4a272f44e7afc745ef913546000000000000
 0000 00 08155f8300035186005100e9fb08050040007e5700ffff6301000010ff2365f96e1e000000
 0200 00 00105f00000621e000daf7b1f73a0000c800ff7544b3c59018374774c6b24697f5d70200000000000000000000000000000000000000002c
@@ -84,7 +84,6 @@ Structure:
 2402 15 9e7f005800b5ff20f1f01904210bd5f5ffff
 2302 15 9f4a6cd1c44625314792e5b04614cb45d6da5c26aa4e44a2ca72c5cdb4edc3ffff
 2202 15 9e7e0014009efff6e8c89f0822fc8ff3ffff
-
 ```
 
 ```c
@@ -93,7 +92,7 @@ Structure:
 struct NetValue {
     le u16 entity_index;
     u8 entity_type;
-    char data[?]; // TODO: how is length determined?
+    char data[?]; // length depends on entity type
 };
 
 struct NetData {
@@ -111,16 +110,50 @@ struct NetData {
 
 Packets are split into Data packets (map change, resources, chat message, etc) and entity (position?) updates
 
-## Packet types
+## Entity Types
+- 00: Vehicle
+- 01: Cloud
+- 02: Swarm
+- 03: Inferno
+- 04: Sonic
+- 05: EMI
+- 06: Box:Ener
+- 07: Box:Miss
+- 08: Box:Part
+- 09: Box:Life
+- 10: Box:iXtr
+- 11: Box:iSiz
+- 12: Box:aBom
+- 13: Box:aSpd
+- 14: Box:dAim
+- 15: Box:dBom
+- 16: Box:tAim
+- 17: Box:tTra
+- 18: Box:sRot
+- 19: Box:sRck
+- 20: Box:vAim
+- 21: Box:vSpd
 
-- 00: MapChange:
+## Server->Client Packet Types
+
+- 00: Player Join
+- 02: Disconnect
+- 03: Chat String
+- 04: Usr String
+- 05: Unk (Keepalive?)
+- 06: Player Modify
+- 08: Remote command
+
+## Client->Server Packet types
+
+- 00: Map Change:
   - str map_name
   - str game_mode
 
 - 01: Resource:
-  - u8: unk
-  - u16?: num_resources
-  - [str: resource_name]*num_resources
+  - u16: resource_index
+  - u16: unk
+  - [str: resource_name] repeated num_resources times
 
 - 02: Unknown (Keepalive?)
 

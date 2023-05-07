@@ -2,23 +2,38 @@
 
 Fixed Key: `020406080a0c0e10121416181a1c1e20222426282a2c2e30323436383a3c3e40`
 Packet Structure:
+```rust
+struct Packet {
+	#[len=pad_16(nonce_len)]
+	nonce: Vec<u8>,
+	#[len=pad_16(data_len)]
+	data: Vec<u8>,
+	nonce_len: u64,
+	data_len: u64
+	tag: [u8;16]
+}
 ```
-[0..nonce_len]: nonce
-[nonce_len..(16-nonce_len%16)]: padding
-[16..ciphertext_len]: Ciphertext
-[nonce_len+(16-nonce_len%16)+ciphertext_len]
-
-
+```
       00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F
 0000  ED C9 C2 F4 7C 6D F2 54 42 EF 46 F6 00 00 00 00  ....|m.TB.F.....
+
 0010  68 13 5C 9A 2B 18 DB 9C 76 BE A0 8A 3E 49 79 3C  h.\.+...v...>Iy<
 0020  8D 7A C4 4C 8B B0 A4 94 E5 B5 89 54 A6 ED 6D 75  .z.L.......T..mu
 0030  1A CA A8 4B 22 B5 03 84 F7 3C DE 4E B0 30 81 29  ...K"....<.N.0.)
 0040  3B 70 45 15 33 C0 97 67 85 6B 28 EF 2E 2E D1 83  ;pE.3..g.k(.....
 0050  E6 56 A7 81 53 89 3E 52 D8 82 CF 77 92 CF C2 D6  .V..S.>R...w....
 0060  9F 37 C5 DE EE 14 4D 3F 1F 82 32 7E 00 00 00 00  .7....M?..2~....
+
 0070  0C 00 00 00 00 00 00 00 5C 00 00 00 00 00 00 00  ........\.......
+
 0080  89 7A A8 32 93 56 B6 68 24 E0 58 63 7F 70 5A D2  .z.2.V.h$.Xc.pZ.
+```
+Decryption algorithm (Pseudocode):
+```python
+cipher = ChaCha20(key,pkt.nonce)
+packet_key = cipher.decrypt(key)
+cipher.seek(packet_key.len()+32)
+data = cipher.decrypt(pkt.data)
 ```
 Decrypted:
 ```

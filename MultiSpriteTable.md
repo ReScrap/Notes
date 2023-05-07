@@ -1,4 +1,3 @@
-# MultiSpriteTable
 
 ```cpp
 struct Tile {
