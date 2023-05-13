@@ -92,7 +92,7 @@ Structure:
 struct NetValue {
     le u16 entity_index;
     u8 entity_type;
-    char data[?]; // length depends on entity type
+    char data[?]; // variable length
 };
 
 struct NetData {
@@ -134,17 +134,33 @@ Packets are split into Data packets (map change, resources, chat message, etc) a
 - 20: Box:vAim
 - 21: Box:vSpd
 
-## Server->Client Packet Types
+
+## Client->Server (`cClientNetManager`) Packet Types
 
 - 00: Player Join
+	- u16: NET_GAME_ID (`0xbace`)
+	- u16: NET_GAME_VERSION (`0x101`)
+	- str: ServerPassword
+	- str: PlayerName
+	- str: ShipModelName
+	- u16: ShipHealth
+	- str: PilotModel
+	- str\[4]: EngineModels
+	- str: Loadout
+	- u32: TeamNumber
+- 06: Player Modify
+	- Same as 00: Player Join
 - 02: Disconnect
 - 03: Chat String
+	- str: ChatString
 - 04: Usr String
+	- str: UsrString
 - 05: Unk (Keepalive?)
-- 06: Player Modify
 - 08: Remote command
+	- str: ServerRemotePassword
+	- str: Command
 
-## Client->Server Packet types
+## Server->Client (`cServerNetManager`) Packet types
 
 - 00: Map Change:
   - str map_name
@@ -153,27 +169,27 @@ Packets are split into Data packets (map change, resources, chat message, etc) a
 - 01: Resource:
   - u16: resource_index
   - u16: unk
-  - [str: resource_name] repeated num_resources times
+  - str[]: resource_name 
 
 - 02: Unknown (Keepalive?)
 
 - 03: ChatMessage
-  - str: message
+  - str: ChatStr
 
 - 04: UsrString:
-  - str: data
+  - str: UsrStr
 
 - 05: Player join:
   - u8: player_id
   - str: player_name
   - str: ship_model
   - u16: max_health
-  - str[4]: engine_models
+  - str\[4]: engine_models
   - str: pilot_model
   - str: loadout
-  - u32: unknown
+  - u32: team_number
 
 - 06: unknown
   - u8: ent_index
 
-- 07: unknown (reload?)
+- 07: unknown (restart?)

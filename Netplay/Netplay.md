@@ -1,4 +1,4 @@
-# Encryption (v1.1)
+# Encryption  (v1.1)
 
 Fixed Key: `020406080a0c0e10121416181a1c1e20222426282a2c2e30323436383a3c3e40`
 Packet Structure:

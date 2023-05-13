@@ -70,6 +70,21 @@ Checked in `0x00401180`
   * `idiota`
   * `capullo`
 
+## Keyboard Shortcuts
+
+Resource ID 200 (0xc8)
+
+Shift+Esc: Exit game
+Ctrl+Alt+Shift+F10: Change graphics device
+Ctrl+F11: Focus Console Window
+F10: Pause game
+F12: Nothing?
+Ctrl+F12: Show FPS
+Ctrl+Alt+Shift+F7: Wireframe
+Ctrl+Alt+Shift+F8: Texture Filtering Mode
+Ctrl+Alt+Shift+F9: Cycle Rendering Info
+Ctrl+Alt+Shift+Enter: Toggle fullscreen
+
 ## Window Messages
 
 **TODO**
