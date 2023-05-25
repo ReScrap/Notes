@@ -135,7 +135,7 @@ Packets are split into Data packets (map change, resources, chat message, etc) a
 - 21: Box:vSpd
 
 
-## Client->Server (`cClientNetManager`) Packet Types
+## Client->Server (handled in `cClientNetManager`) Packet Types
 
 - 00: Player Join
 	- u16: NET_GAME_ID (`0xbace`)
@@ -160,7 +160,7 @@ Packets are split into Data packets (map change, resources, chat message, etc) a
 	- str: ServerRemotePassword
 	- str: Command
 
-## Server->Client (`cServerNetManager`) Packet types
+## Server->Client (handled in `cServerNetManager`) Packet types
 
 - 00: Map Change:
   - str map_name
